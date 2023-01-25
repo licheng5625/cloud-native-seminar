@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const router = express.Router();
+const fs = require("fs");
 
 const port = 8080;
 app.set("view engine", "pug");
@@ -18,8 +19,18 @@ router.get('/health', (req, res) => {
 
 
 
-router.get('/',function(req,res){
-    res.render("index",{ message: "Hello from " +  process.env.MY_POD_NAME + " !"  });;
+router.get('/', function (req, res) {
+    try {
+      const version = fs.readFileSync("./VERSION", "utf8");
+      res.render("index", {
+        message: "Current version is " + version + " !",
+      });
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(401);
+    }
+
+    
 });
 
 
