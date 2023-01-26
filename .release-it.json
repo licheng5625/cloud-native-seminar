@@ -1,0 +1,37 @@
+{
+    "git": {
+        "requireCleanWorkingDir": false,
+        "commitMessage": "chore(version): release ${version}",
+        "tagName": "v${version}"
+    },
+    "github": {
+        "release": true,
+        "releaseName": "v${version}",
+        "host": "github.com"
+    },
+    "npm": {
+        "publish": false
+    },
+    "plugins": {
+        "@release-it/bumper": {
+            "in": {
+                "file": "VERSION",
+                "type": "text/plain"
+            },
+            "out": [
+                {
+                    "file": "VERSION",
+                    "type": "text/plain"
+                },
+                {
+                    "file": "./package.json",
+                    "type": "application/json"
+                }
+            ]
+        },
+        "@release-it/conventional-changelog": {
+            "preset": "angular",
+            "infile": "CHANGELOG.md"
+        }
+    }
+}
