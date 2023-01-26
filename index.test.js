@@ -16,3 +16,12 @@ describe("Test the root path, response", () => {
     expect(response.text).toContain("Current version is");
   });
 });
+
+
+
+describe("Test the user, response", () => {
+  test("It should return all users", async () => {
+    const response = await request(app).get("/user");
+    expect(JSON.parse(response.text).length).not.toBe(0);
+  });
+});
