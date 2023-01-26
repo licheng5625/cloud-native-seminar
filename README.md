@@ -1,3 +1,9 @@
+# CICD
+CI/CD or CICD is the combined practices of continuous integration (CI) and (more often) continuous delivery or (less often) continuous deployment (CD)
+
+![cd](./doc/cicd.png)
+
+
 # What is REST(Representational State Transfer)
 
 - provides a HTTP interface for a resource e.g. product
