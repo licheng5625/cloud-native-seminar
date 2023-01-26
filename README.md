@@ -8,12 +8,19 @@ A system is only RESTful, if it does not violate any of the six guiding constrai
 The most important are:
 
 **Cacheability**: Responses must define themselves as either cacheable or non-cacheable
+
 **Statelessness**: communication is stateless
     - resource state is stored on the server and is sharable to all clients
     - application state is stored on each client and consists of information that cannot be shared.
     - clients are responsible for passing application state to the server when it needs it.
 
-# Syntax of RESTfull
+# Syntax of RESTful APIs
+- GET Requesting a resource from the server
+- POST Send some data to the server
+- PUT Replace a resource
+- PATCH Replace parts of a resource
+- DELETE Delete a resource
+
 ## Get Method
 GET Requesting a resource from the server 
 query parameters (optional)
@@ -41,6 +48,6 @@ GraphQL
 ![apis](./doc/apis.png)
 
 # Benifit of cloud service architect  
-+ Asynchronous 
++ Asynchronous communication
 + Multi-Tenancy
 + Programming language independent
