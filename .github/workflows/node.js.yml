@@ -1,0 +1,55 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "1/web-application" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        # The Checkout actions at v2 and beyond prevent pushes as another user due to persist-credentials being set to true by default
+        persist-credentials: false
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm test
+    - name: Publish Test Report
+      uses: mikepenz/action-junit-report@v3
+      if: always() # always run even if the previous step fails
+      with:
+        report_paths: 'junit.xml'
+    - name: Install release it
+      run: npm install -g release-it @release-it/bumper @release-it/conventional-changelog
+
+    - name: create new release
+      id: create_new_release_version
+      run: |
+        export GITHUB_TOKEN=${{ secrets.GITHUB }}
+        git config --global user.email "you@example.com"
+        git config --global user.name "licheng5625"
+        release-it --ci -VV   
+        newVersion=$(git describe --tags)
+        echo $newVersion
+        echo "newVersion=$newVersion" >> $GITHUB_OUTPUT
+        git diff HEAD^ HEAD ./CHANGELOG.md | grep "^+[^+]"
+        gitlog=$(git diff HEAD^ HEAD ./CHANGELOG.md | grep "^+[^+]"| base64 -w 0)
+        echo $gitlog
+        echo "gitlog=$gitlog" >> $GITHUB_OUTPUT
