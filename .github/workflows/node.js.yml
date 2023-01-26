@@ -5,7 +5,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "1/web-application" ]
+    branches: [ "2/docker" ]
 
 jobs:
   build:
@@ -19,11 +19,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-        # The Checkout actions at v2 and beyond prevent pushes as another user due to persist-credentials being set to true by default
-        persist-credentials: false
-
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
