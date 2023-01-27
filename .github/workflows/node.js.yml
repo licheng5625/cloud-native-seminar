@@ -6,7 +6,7 @@ name: Node.js CI
 on:
   push:
     branches: [ "1/web-application" ]
-
+permissions: write-all
 jobs:
   build:
 
