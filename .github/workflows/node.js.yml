@@ -11,9 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: deploy to cluster
-      uses: steebchen/kubectl@master
-      env:
-        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+    - uses: Azure/k8s-set-context@v2
       with:
-        args: apply -n lichange5625 -f ./node-app-deployment.yaml
+        kubeconfig: ${{ secrets.KUBE_CONFIG }}
+
+    - uses: Azure/k8s-deploy@v4
+      with:
+        action: deploy
+        manifests: |
+            node-app-deployment.yaml
