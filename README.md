@@ -9,15 +9,17 @@ a category of cloud computing services that provides a platform allowing custome
 ![paas-vendors-technologies](./doc/paas-vendors-technologies.svg)
 # What is K8s
 Containers are a good way to bundle and run your applications. In a production environment, you need to manage the containers that run the applications and ensure that there is no downtime. For example, if a container goes down, another container needs to start.
-Kubernetes provides you with a framework to run distributed systems resiliently
+Kubernetes provides you with a framework to run distributed systems resiliently.
 
 ![k8s](./doc/k8s.png)
 
-![what is docker](./doc/container-what-is-container.png)
-# VM vs Container
-Virtual machines virtualize an entire machine down to the hardware layers and containers only virtualize software layers above the operating system level
+# What is gardener
+Deliver fully-managed clusters at scale everywhere with your own Kubernetes-as-a-Service.
 
-![vb docker](./doc/vm-docker.png)
+![vb docker](./doc/gardener-logo.svg)
+
+Gardener will mangage your k8s cluster across different hyperscalers.
+![vb docker](./doc/lp-gardener-diagram.svg)
 
 # Benifit of cloud service architect  
 + Standardization & productivity
