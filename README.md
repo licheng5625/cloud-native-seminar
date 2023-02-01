@@ -18,24 +18,16 @@ Deliver fully-managed clusters at scale everywhere with your own Kubernetes-as-a
 
 ![vb docker](./doc/gardener-logo.svg)
 
-Gardener will mangage your k8s cluster across different hyperscalers.
+Gardener will mangage your k8s cluster across different hyperscalers. Gardener abstracts environment specifics to deliver the same homogeneous Kubernetes-native DevOps experience everywhere
+
 ![vb docker](./doc/lp-gardener-diagram.svg)
 
-# Benifit of cloud service architect  
-+ Standardization & productivity
-+ Simplicity & faster configurations
-+ Rapid Deployment
-+ Multi-Cloud Platforms
-+ Isolation
-+ Security
+# What is Kyma
+Kyma /kee-ma/ is a cloud-native application runtime that combines the power of Kubernetes with a set of best-in-class tools and open-source components that empower you to develop, run, and operate secure and scalable cloud-native applications.
 
-# How to build and run
-```
-docker image build -t cloud-native-seminar .
-```
+![vb docker](./doc/kyma.png)
 
-```
-docker run --rm -p 8080:8080 cloud-native-seminar
-```
-http://localhost:8080/user
+ Kyma will pre-install some tools in the k8s cluster. Its goal is to make developer more focus on business logic not the tools.
+![vb docker](./doc/kyma-areas.svg)
+
 

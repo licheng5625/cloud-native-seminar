@@ -46,3 +46,27 @@ spec:
   - protocol: TCP
     port: 5000
     targetPort: 8080
+
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: okteto-node-app-service
+  namespace: licheng5625
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - node-app-service-licheng5625.cloud.okteto.net
+  rules:
+    - host: node-app-service-licheng5625.cloud.okteto.net
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: node-app-service
+                port:
+                  number: 5000
