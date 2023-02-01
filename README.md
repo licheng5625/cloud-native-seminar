@@ -43,7 +43,7 @@ Status: Downloaded newer image for php:8.0-apache
 docker.io/library/php:8.0-apache
 ```
 
-# How to build and run
+# How to build and run locally
 ```
 docker image build -t cloud-native-seminar .
 ```
@@ -53,3 +53,9 @@ docker run --rm -p 8080:8080 cloud-native-seminar
 ```
 http://localhost:8080/user
 
+# Push to artifactory
+```
+docker push licheng5625/cloud-native-seminar
+```
+
+https://hub.docker.com/repository/docker/licheng5625/cloud-native-seminar/general
