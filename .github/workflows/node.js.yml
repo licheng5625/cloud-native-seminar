@@ -5,7 +5,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "2/docker" ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -43,3 +43,13 @@ jobs:
         docker image build -t cloud-native-seminar .
         docker image tag cloud-native-seminar licheng5625/cloud-native-seminar
         docker image push licheng5625/cloud-native-seminar
+    - uses: Azure/k8s-set-context@v2
+      with:
+        kubeconfig: ${{ secrets.KUBE_CONFIG }}
+
+    - uses: Azure/k8s-deploy@v4
+      with:
+        action: deploy
+        namespace: licheng5625
+        manifests: |
+            node-app-deployment.yaml
