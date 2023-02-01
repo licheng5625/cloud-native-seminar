@@ -1,4 +1,7 @@
+# CICD
+CI/CD or CICD is the combined practices of continuous integration (CI) and (more often) continuous delivery or (less often) continuous deployment (CD)
 
+![cd](./doc/cicd.png)
 # Cloud Computing Platforms
 a category of cloud computing services that provides a platform allowing customers to develop, run, and manage applications without the complexity of building and maintaining the infrastructure
 ![Paas](./doc/PaaS.svg)
