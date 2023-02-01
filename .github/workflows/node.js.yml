@@ -31,20 +31,3 @@ jobs:
       if: always() # always run even if the previous step fails
       with:
         report_paths: 'junit.xml'
-    - name: Install release it
-      run: npm install -g release-it @release-it/bumper @release-it/conventional-changelog
-
-    - name: create new release
-      id: create_new_release_version
-      run: |
-        export GITHUB_TOKEN=${{ secrets.GITHUB }}
-        git config --global user.email "you@example.com"
-        git config --global user.name "licheng5625"
-        release-it --ci -VV   
-        newVersion=$(git describe --tags)
-        echo $newVersion
-        echo "newVersion=$newVersion" >> $GITHUB_OUTPUT
-        git diff HEAD^ HEAD ./CHANGELOG.md | grep "^+[^+]"
-        gitlog=$(git diff HEAD^ HEAD ./CHANGELOG.md | grep "^+[^+]"| base64 -w 0)
-        echo $gitlog
-        echo "gitlog=$gitlog" >> $GITHUB_OUTPUT
