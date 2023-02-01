@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: node-app
-        image: licheng5625/pattern-example:latest
+        image: licheng5625/cloud-native-seminar:latest
         ports:
         - containerPort: 8080
         env:

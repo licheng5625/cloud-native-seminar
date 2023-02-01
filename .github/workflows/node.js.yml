@@ -1,0 +1,19 @@
+
+name: deploy
+
+on:
+  push:
+    branches: [ "3/k8s" ]
+
+jobs:
+  deploy:
+    name: deploy to cluster
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: deploy to cluster
+      uses: steebchen/kubectl@master
+      env:
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+      with:
+        args: apply -n lichange5625 -f ./node-app-deployment.yaml
