@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-app-deployment
+  namespace: licheng5625
+  labels:
+    app: node-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-app
+  template:
+    metadata:
+      labels:
+        app: node-app 
+    spec:
+      containers:
+      - name: node-app
+        image: licheng5625/cloud-native-seminar:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          failureThreshold: 3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: licheng5625
+  name: node-app-service
+spec:
+  selector:
+    app: node-app 
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 8080
+
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: okteto-node-app-service
+  namespace: licheng5625
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - node-app-service-licheng5625.cloud.okteto.net
+  rules:
+    - host: node-app-service-licheng5625.cloud.okteto.net
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: node-app-service
+                port:
+                  number: 5000
